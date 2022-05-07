@@ -138,11 +138,11 @@ export ALLOW_MISSING_DEPENDENCIES=true
 # and then `source` and `lunch` again
 
 source build/envsetup.sh
-lunch twrp_${CODENAME}-${FLAVOR} || { printf "Compilation failed.\n"; exit 1; }
+lunch twrp_${CODENAME}-${FLAVOR} || { printf "Lunch failed.\n"; exit 1; }
 echo "::endgroup::"
 
 echo "::group::Compilation"
-mka ${TARGET} -j($nproc + 1) || { printf "Compilation failed.\n"; exit 1; }
+make -j$(nproc + 1) ${TARGET} || { printf "Compilation failed.\n"; exit 1; }
 echo "::endgroup::"
 
 # Export VENDOR, CODENAME and BuildPath for next steps
