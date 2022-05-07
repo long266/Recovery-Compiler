@@ -23,7 +23,7 @@ jobs:
       - name: "Recovery Compilation"
         uses: long266/Recovery-Compiler@production
         env:
-          MANIFEST: "repo init -u https://github.com/SHRP/manifest.git -b v3_11.0"
+          MANIFEST: "https://github.com/SHRP/manifest.git -b v3_11.0"
           DT_LINK: "https://github.com/long266/twrp_device_samsung_a32"
           VENDOR: "samsung"  # Example: xiaomi, samsung, asus, etc.
           CODENAME: "a32"   # Example: nikel, phoenix, ginkgo, etc.
