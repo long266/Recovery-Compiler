@@ -11,7 +11,7 @@ on:
 # ...
 jobs:
   recovery_builder:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     # You can use either of the ubuntu-18.04 or ubuntu-20.04 runner
     steps:
       # Checking out the repo is not mandatory, so don't
