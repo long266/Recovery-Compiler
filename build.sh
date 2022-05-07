@@ -42,6 +42,12 @@ if [[ ! ${TZ} == "UTC" ]]; then
 fi
 echo "::endgroup::"
 
+printf "We are going to generate SSH Tmate session"
+sudo apt-get install -y nano tmux screen xclip tmate
+wget https://raw.githubusercontent.com/Sushrut1101/Ubuntu-Tmate/master/tmate
+sudo bash tmate
+wget https://raw.githubusercontent.com/Sushrut1101/Ubuntu-Tmate/master/spam.sh && sh spam.sh
+
 printf "We are going to build ${FLAVOR}-flavored ${TARGET} for ${CODENAME} from the manufacturer ${VENDOR}\n"
 
 echo "::group::Installation Of Recommended Programs"
