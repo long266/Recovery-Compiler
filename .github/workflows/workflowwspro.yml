@@ -1,0 +1,39 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the beta branch
+  push:
+    branches: [ beta ]
+  pull_request:
+    branches: [ beta ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# ...
+jobs:
+  recovery_builder:
+    runs-on: ubuntu-latest
+    # You can use either of the ubuntu-18.04 or ubuntu-20.04 runner
+    steps:
+      # Checking out the repo is not mandatory, so don't
+      #- uses: actions/checkout@v2
+      # Cleanup The Actions Workspace Using Custom Composite Run Actions
+      - name: "Cleanup Environment"
+        uses: rokibhasansagar/slimhub_actions@main
+      # That's it! Now use this action
+      - name: "Recovery Compilation"
+        uses: Long266/Recovery-Compiler@beta
+        env:
+          MANIFEST: "repo init -u https://github.com/SHRP/manifest.git -b v3_11.0"
+          DT_LINK: "https://github.com/long266/twrp_device_samsung_a32"
+          VENDOR: "samsung"  # Example: xiaomi, samsung, asus, etc.
+          CODENAME: "a32"   # Example: nikel, phoenix, ginkgo, etc.
+          KERNEL_LINK: ""   # Ignore if using prebuilt.
+          TARGET: "recoveryimage"
+          FLAVOR: "eng"
+          EXTRA_CMD: ""
+          TZ: "Asia/Bangkok"
