@@ -26,7 +26,7 @@ jobs:
         uses: rokibhasansagar/slimhub_actions@main
       # That's it! Now use this action
       - name: "Recovery Compilation"
-        uses: Long266/Recovery-Compiler@beta
+        uses: long266/Recovery-Compiler@beta
         env:
           MANIFEST: "repo init -u https://github.com/SHRP/manifest.git -b v3_11.0"
           DT_LINK: "https://github.com/long266/twrp_device_samsung_a32"
