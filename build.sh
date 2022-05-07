@@ -145,7 +145,7 @@ echo "༄Compiling Recovery...\n"
 export ALLOW_MISSING_DEPENDENCIES=true
 
 source build/envsetup.sh
-lunch omni_${CODENAME}-${FLAVOR} || { printf "Compilation failed.\n"; exit 1; }
+lunch twrp_${CODENAME}-${FLAVOR} || { printf "Compilation failed.\n"; exit 1; }
 
 mka ${TARGET} || { printf "Compilation failed.\n"; exit 1; }
 #make -j1 ${TARGET} || { printf "Compilation failed.\n"; exit 1; }
