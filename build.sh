@@ -150,26 +150,4 @@ echo "VENDOR=${VENDOR}" >> ${GITHUB_ENV}
 echo "CODENAME=${CODENAME}" >> ${GITHUB_ENV}
 echo "BuildPath=/home/runner/builder" >> ${GITHUB_ENV}
 
-# Add GitHub Release Script Here
-cd out/target/product/${CODENAME}
-
-# Set FILENAME var
-OUTPUT=SHRP*.zip
-FILENAME=$(echo $OUTPUT)
-TIMEOUT=20160
-
-# Upload to WeTransfer
-# NOTE: included the 'transfer' binary by Default
-./home/runner/work/_actions/long266/Recovery-Compiler/production/transfer wet $FILENAME > link.txt || { echo "ERROR: Failed to Upload the Build!" && exit 1; }
-
-# Mirror to oshi.at
-curl -T $FILENAME https://oshi.at/${FILENAME}/${OUTPUT} > mirror.txt || { echo "WARNING: Failed to Mirror the Build!"; }
-
-DL_LINK=$(cat link.txt | grep Download | cut -d\  -f3)
-MIRROR_LINK=$(cat mirror.txt | grep Download | cut -d\  -f1)
-
-# Show the Download Link
-echo "=============================================="
-echo "Download Link: ${DL_LINK}" || { echo "ERROR: Failed to Upload the Build!"; }
-echo "Mirror: ${MIRROR_LINK}" || { echo "WARNING: Failed to Mirror the Build!"; }
-echo "=============================================="
+# TODO :Add GitHub Release Script Here
