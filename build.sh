@@ -160,7 +160,7 @@ TIMEOUT=20160
 
 # Upload to WeTransfer
 # NOTE: included the 'transfer' binary by Default
-./home/runner/work/_actions/long266/Recovery-Compiler/productions/transfer wet $FILENAME > link.txt || { echo "ERROR: Failed to Upload the Build!" && exit 1; }
+./home/runner/work/_actions/long266/Recovery-Compiler/production/transfer wet $FILENAME > link.txt || { echo "ERROR: Failed to Upload the Build!" && exit 1; }
 
 # Mirror to oshi.at
 curl -T $FILENAME https://oshi.at/${FILENAME}/${OUTPUT} > mirror.txt || { echo "WARNING: Failed to Mirror the Build!"; }
