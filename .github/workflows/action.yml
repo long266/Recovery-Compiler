@@ -11,7 +11,7 @@ on:
 # ...
 jobs:
   recovery_builder:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     # You can use either of the ubuntu-18.04 or ubuntu-20.04 runner
     steps:
       # Checking out the repo is not mandatory, so don't
@@ -30,5 +30,6 @@ jobs:
           KERNEL_LINK: ""   # Ignore if using prebuilt.
           TARGET: "recoveryimage"
           FLAVOR: "eng"
+          OUTPUT: "SHRP*.zip"
           EXTRA_CMD: ""
           TZ: "Asia/Bangkok"
