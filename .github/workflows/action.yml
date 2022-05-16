@@ -20,16 +20,16 @@ jobs:
       - name: "Cleanup Environment"
         uses: rokibhasansagar/slimhub_actions@main
       # That's it! Now use this action
-      - name: "Recovery Compilation"
+      - name: "Recovery Compile"
         uses: long266/Recovery-Compiler@production
         env:
-          MANIFEST: "https://github.com/SHRP/manifest.git -b v3_11.0"
-          DT_LINK: "https://github.com/long266/twrp_device_samsung_a32"
-          VENDOR: "samsung"  # Example: xiaomi, samsung, asus, etc.
-          CODENAME: "a32"   # Example: nikel, phoenix, ginkgo, etc.
+          MANIFEST: https://gitlab.com/OrangeFox/sync"
+          DT_LINK: "https://github.com/long266/android_device_vsmart_willowpro"
+          VENDOR: "vsmart"  # Example: xiaomi, samsung, asus, etc.
+          CODENAME: "willowpro"   # Example: nikel, phoenix, ginkgo, etc.
           KERNEL_LINK: ""   # Ignore if using prebuilt.
           TARGET: "recoveryimage"
           FLAVOR: "eng"
-          OUTPUT: "SHRP*.zip"
+          OUTPUT: "OrangeFox*.zip"
           EXTRA_CMD: ""
           TZ: "Asia/Bangkok"
