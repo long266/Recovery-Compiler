@@ -101,10 +101,18 @@ printf "Initializing Repo\n"
 python --version
 python3 --version
 python2 --version
-printf "We will be using %s for Manifest source\n" "${MANIFEST}"
-repo init -u ${MANIFEST} --depth=1 --groups=all,-notdefault,-device,-darwin,-x86,-mips || { printf "Repo Initialization Failed.\n"; exit 1; }
-repo sync -c --force-sync --no-clone-bundle --no-tags -j6 || { printf "Git-Repo Sync Failed.\n"; exit 1; }
+git clone https://gitlab.com/OrangeFox/sync.git fox_sync || { printf "Sybc Initialization Failed.\n"; exit 1; }
+cd fox_sync
+chmod a+x orangefox_sync.sh
+./orangefox_sync.sh --branch fox_11.0 --path ../
+cd ..
+rm -r fox_sync
 echo "::endgroup::"
+
+# Clone the theme if not already present
+if [ ! -d bootable/recovery/gui/theme ]; then
+git clone https://gitlab.com/OrangeFox/misc/theme.git bootable/recovery/gui/theme || { printf "Failed to Clone the OrangeFox Theme.\n"; exit 1; }
+fi
 
 echo "::group::Device and Kernel Tree Cloning"
 printf "Cloning Device Tree\n"
