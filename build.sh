@@ -101,7 +101,7 @@ printf "Initializing Repo\n"
 python --version
 python3 --version
 python2 --version
-git clone https://gitlab.com/OrangeFox/sync.git fox_sync || { printf "Sybc Initialization Failed.\n"; exit 1; }
+git clone ${MANIFEST} fox_sync || { printf "Sybc Initialization Failed.\n"; exit 1; }
 cd fox_sync
 chmod a+x orangefox_sync.sh
 ./orangefox_sync.sh --branch fox_11.0 --path ../
