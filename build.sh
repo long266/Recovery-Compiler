@@ -96,22 +96,27 @@ echo "::endgroup::"
 mkdir -p /home/runner/builder &>/dev/null
 cd /home/runner/builder || exit 1
 
+# Setup the Sync Branch
+if [ -z "$SYNC_BRANCH" ]; then
+    export SYNC_BRANCH=$(echo ${FOX_BRANCH} | cut -d_ -f2)
+fi
+
 echo "::group::Source Repo Sync"
 printf "Initializing Repo\n"
 python --version
 python3 --version
 python2 --version
-git clone ${MANIFEST} fox_sync || { printf "Sybc Initialization Failed.\n"; exit 1; }
+git clone ${MANIFEST} fox_sync || { printf "ERROR: Repo Initialization Failed.\n"; exit 1; }
 cd fox_sync
 chmod a+x orangefox_sync.sh
-./orangefox_sync.sh --branch fox_11.0 --path ../
+./orangefox_sync.sh --branch $SYNC_BRANCH --path ../ || { printf "ERROR: Failed to Sync OrangeFox Sources.\n"; exit 1; }
 cd ..
 rm -r fox_sync
 echo "::endgroup::"
 
 # Clone the theme if not already present
 if [ ! -d bootable/recovery/gui/theme ]; then
-git clone https://gitlab.com/OrangeFox/misc/theme.git bootable/recovery/gui/theme || { printf "Failed to Clone the OrangeFox Theme.\n"; exit 1; }
+git clone https://gitlab.com/OrangeFox/misc/theme.git bootable/recovery/gui/theme || { printf "ERROR: Failed to Clone the OrangeFox Theme.\n"; exit 1; }
 fi
 
 echo "::group::Device and Kernel Tree Cloning"
@@ -146,11 +151,11 @@ export ALLOW_MISSING_DEPENDENCIES=true
 # and then `source` and `lunch` again
 
 source build/envsetup.sh
-lunch twrp_${CODENAME}-${FLAVOR} || { printf "Lunch failed.\n"; exit 1; }
+lunch twrp_${CODENAME}-${FLAVOR} || { printf "ERROR: Lunch failed.\n"; exit 1; }
 echo "::endgroup::"
 
 echo "::group::Compilation"
-make -j$(nproc + 1) ${TARGET} || { printf "Compilation failed.\n"; exit 1; }
+make -j$(nproc + 1) ${TARGET} || { printf "ERROR: Compilation failed.\n"; exit 1; }
 echo "::endgroup::"
 
 # Export VENDOR, CODENAME and BuildPath for next steps
