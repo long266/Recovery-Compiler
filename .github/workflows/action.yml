@@ -25,6 +25,7 @@ jobs:
         env:
           MANIFEST: "https://gitlab.com/OrangeFox/sync.git"
           DT_LINK: "https://github.com/long266/android_device_vsmart_willowpro"
+          FOX_BRANCH: "fox_11.0" # fox_12.1, fox_10.0 ....
           VENDOR: "vsmart"  # Example: xiaomi, samsung, asus, etc.
           CODENAME: "willowpro"   # Example: nikel, phoenix, ginkgo, etc.
           KERNEL_LINK: ""   # Ignore if using prebuilt.
