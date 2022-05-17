@@ -23,7 +23,7 @@ jobs:
       - name: "Recovery Compile"
         uses: long266/Recovery-Compiler@production
         env:
-          MANIFEST: https://gitlab.com/OrangeFox/sync"
+          MANIFEST: "https://gitlab.com/OrangeFox/sync.git"
           DT_LINK: "https://github.com/long266/android_device_vsmart_willowpro"
           VENDOR: "vsmart"  # Example: xiaomi, samsung, asus, etc.
           CODENAME: "willowpro"   # Example: nikel, phoenix, ginkgo, etc.
