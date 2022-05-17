@@ -109,8 +109,8 @@ python2 --version
 git clone ${MANIFEST} fox_sync || { printf "ERROR: Repo Initialization Failed.\n"; exit 1; }
 cd fox_sync
 chmod a+x orangefox_sync.sh
-./orangefox_sync.sh --branch $SYNC_BRANCH --path ../ || { printf "ERROR: Failed to Sync OrangeFox Sources.\n"; exit 1; }
-cd ..
+./orangefox_sync.sh --branch $SYNC_BRANCH --path /home/runner/builder/work || { printf "ERROR: Failed to Sync OrangeFox Sources.\n"; exit 1; }
+cd /home/runner/builder/work
 rm -r fox_sync
 echo "::endgroup::"
 
