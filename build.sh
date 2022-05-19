@@ -181,7 +181,7 @@ BRANCH_INT=$(echo $BRANCH | cut -d. -f1)
 
 source build/envsetup.sh
 # lunch the target
-if [[ "$BRANCH_INT" = "v3_11.0" || "$BRANCH_INT" = "shrp-12.1" || "$BRANCH_INT" = "twrp-11" || "$BRANCH_INT" = "twrp_12.1" || "$BRANCH_INT" -ge 11 || "$BRANCH_INT" -ge 12.1]]; then
+if [ "$BRANCH" = "v3_11.0" ]; then
     lunch twrp_${DEVICE}-${FLAVOR} || { echo "ERROR: Failed to lunch the target!" && exit 1; }
 else
     lunch omni_${DEVICE}-${FLAVOR} || { echo "ERROR: Failed to lunch the target!" && exit 1; }
