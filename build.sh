@@ -106,16 +106,42 @@ printf "Initializing Repo\n"
 python --version
 python3 --version
 python2 --version
-git clone ${MANIFEST} fox_sync || { printf "ERROR: Repo Initialization Failed.\n"; exit 1; }
-cd fox_sync
-chmod a+x orangefox_sync.sh
-./orangefox_sync.sh --branch $SYNC_BRANCH --path /home/runner/builder/work || { printf "ERROR: Failed to Sync OrangeFox Sources.\n"; exit 1; }
-cd /home/runner/builder/work
-rm -r fox_sync
+
+if [ "$MANIFEST" = "fox_12.1" ]; then
+    git clone ${MANIFEST} fox_sync || { printf "ERROR: Repo Initialization Failed.\n"; exit 1; }
+    cd fox_sync
+    chmod a+x orangefox_sync.sh
+    ./orangefox_sync.sh --branch 12.1 --path /home/runner/builder/orangefox || { printf "ERROR: Failed to Sync OrangeFox Sources.\n"; exit 1; }
+    cd /home/runner/builder/orangefox
+elif [ "$MANIFEST" = "fox_11.0" ]; then
+    git clone ${MANIFEST} fox_sync || { printf "ERROR: Repo Initialization Failed.\n"; exit 1; }
+    cd fox_sync
+    chmod a+x orangefox_sync.sh
+    ./orangefox_sync.sh --branch 11.0 --path /home/runner/builder/orangefox || { printf "ERROR: Failed to Sync OrangeFox Sources.\n"; exit 1; }
+    cd /home/runner/builder/orangefox
+elif [ "$MANIFEST" = "fox_10.0" ]; then
+    git clone ${MANIFEST} fox_sync || { printf "ERROR: Repo Initialization Failed.\n"; exit 1; }
+    cd fox_sync
+    chmod a+x orangefox_sync.sh
+    ./orangefox_sync.sh --branch 10.0 --path /home/runner/builder/orangefox || { printf "ERROR: Failed to Sync OrangeFox Sources.\n"; exit 1; }
+    cd /home/runner/builder/orangefox
+elif [ "$MANIFEST" = "fox_9.0" ]; then
+    git clone ${MANIFEST} fox_sync || { printf "ERROR: Repo Initialization Failed.\n"; exit 1; }
+    cd fox_sync
+    chmod a+x orangefox_sync.sh
+    ./orangefox_sync.sh --branch 9.0 --path /home/runner/builder/orangefox || { printf "ERROR: Failed to Sync OrangeFox Sources.\n"; exit 1; }
+    cd /home/runner/builder/orangefox
+else
+    mkdir -p /home/runner/builder/twrp
+    cd /home/runner/builder/twrp
+    repo init -u ${MANIFEST} || { printf "ERROR: Repo Initialization Failed.\n"; exit 1; }
+    repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags || { printf "Git-Repo Sync Failed.\n"; exit 1; }
+fi
+
 echo "::endgroup::"
 
 # Clone the theme if not already present
-if [ ! -d bootable/recovery/gui/theme ]; then
+if [ ! -d bootable/recovery/gui/theme || "$MANIFEST" = "fox_*" ]; then
 git clone https://gitlab.com/OrangeFox/misc/theme.git bootable/recovery/gui/theme || { printf "ERROR: Failed to Clone the OrangeFox Theme.\n"; exit 1; }
 fi
 
@@ -150,8 +176,16 @@ export ALLOW_MISSING_DEPENDENCIES=true
 # >> https://gist.github.com/rokibhasansagar/247ddd4ef00dcc9d3340397322051e6a/
 # and then `source` and `lunch` again
 
+# Set BRANCH_INT variable for future use
+BRANCH_INT=$(echo $BRANCH | cut -d. -f1)
+
 source build/envsetup.sh
-lunch twrp_${CODENAME}-${FLAVOR} || { printf "ERROR: Lunch failed.\n"; exit 1; }
+# lunch the target
+if [[ "$BRANCH_INT" = "v3_11.0" || "$BRANCH_INT" = "shrp-12.1" || "$BRANCH_INT" = "twrp-11" || "$BRANCH_INT" = "twrp_12.1" || "$BRANCH_INT" -ge 11 || "$BRANCH_INT" -ge 12.1]]; then
+    lunch twrp_${DEVICE}-${FLAVOR} || { echo "ERROR: Failed to lunch the target!" && exit 1; }
+else
+    lunch omni_${DEVICE}-${FLAVOR} || { echo "ERROR: Failed to lunch the target!" && exit 1; }
+fi
 echo "::endgroup::"
 
 echo "::group::Compilation"
