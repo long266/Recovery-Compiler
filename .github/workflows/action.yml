@@ -23,7 +23,7 @@ jobs:
       - name: "Recovery Compile"
         uses: long266/Recovery-Compiler@production
         env:
-          MANIFEST: "repo init -u https://github.com/SHRP/manifest.git"
+          MANIFEST: "https://github.com/SHRP/manifest.git"
           DT_LINK: "https://github.com/long266/twrp_device_samsung_crownlte"
           BRANCH: "v3_9.0"
           VENDOR: "samsung"  # Example: xiaomi, samsung, asus, etc.
