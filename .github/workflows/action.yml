@@ -23,14 +23,14 @@ jobs:
       - name: "Recovery Compile"
         uses: long266/Recovery-Compiler@production
         env:
-          MANIFEST: "https://gitlab.com/OrangeFox/sync.git"
-          DT_LINK: "https://github.com/long266/android_device_vsmart_willowpro"
-          FOX_BRANCH: "fox_11.0" # fox_12.1, fox_10.0 ....
-          VENDOR: "vsmart"  # Example: xiaomi, samsung, asus, etc.
-          CODENAME: "willowpro"   # Example: nikel, phoenix, ginkgo, etc.
+          MANIFEST: "repo init -u https://github.com/SHRP/manifest.git"
+          DT_LINK: "https://github.com/long266/twrp_device_samsung_crownlte"
+          BRANCH: "v3_9.0"
+          VENDOR: "samsung"  # Example: xiaomi, samsung, asus, etc.
+          CODENAME: "crownlte"   # Example: nikel, phoenix, ginkgo, etc.
           KERNEL_LINK: ""   # Ignore if using prebuilt.
           TARGET: "recoveryimage"
           FLAVOR: "eng"
-          OUTPUT: "OrangeFox*.zip"
+          OUTPUT: "SHRP*.zip"
           EXTRA_CMD: ""
           TZ: "Asia/Bangkok"
