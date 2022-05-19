@@ -134,7 +134,7 @@ elif [ "$MANIFEST" = "fox_9.0" ]; then
 else
     mkdir -p /home/runner/builder/twrp
     cd /home/runner/builder/twrp
-    repo init -u ${MANIFEST} || { printf "ERROR: Repo Initialization Failed.\n"; exit 1; }
+    repo init -u ${MANIFEST} -b ${BRANCH} || { printf "ERROR: Repo Initialization Failed.\n"; exit 1; }
     repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags || { printf "Git-Repo Sync Failed.\n"; exit 1; }
 fi
 
