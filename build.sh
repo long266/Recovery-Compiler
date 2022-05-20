@@ -53,10 +53,9 @@ sudo apt-get -qqy update &>/dev/null
 sudo apt-get -qqy install --no-install-recommends \
     lsb-core lsb-security patchutils bc \
     android-sdk-platform-tools adb fastboot \
-    openjdk-8-jdk ca-certificates-java maven \
-    python3-all-dev python-is-python3 python2 \
+    openjdk-8-jdk ca-certificates-java maven |
     lzip lzop xzdec pixz libzstd-dev lib32z1-dev \
-    exfat-utils exfat-fuse \
+    exfat-utils exfat-fuse python-is-python2 \
     build-essential gcc gcc-multilib g++-multilib clang llvm lld cmake ninja-build \
     libxml2-utils xsltproc expat re2c libxml2-utils xsltproc expat re2c \
     libreadline-gplv2-dev libsdl1.2-dev libtinfo5 xterm rename schedtool bison gperf libb2-dev \
