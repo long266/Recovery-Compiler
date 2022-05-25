@@ -24,10 +24,10 @@ jobs:
         uses: long266/Recovery-Compiler@production
         env:
           MANIFEST: "https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp.git"
-          DT_LINK: "https://github.com/long266/twrp_device_samsung_a32"
+          DT_LINK: "https://github.com/long266/twrp_device_samsung_g0q"
           BRANCH: "twrp-12.1"
           VENDOR: "samsung"  # Example: xiaomi, samsung, asus, etc.
-          CODENAME: "a32"   # Example: nikel, phoenix, ginkgo, etc.
+          CODENAME: "g0q"   # Example: nikel, phoenix, ginkgo, etc.
           KERNEL_LINK: ""   # Ignore if using prebuilt.
           TARGET: "recoveryimage"
           FLAVOR: "eng"
